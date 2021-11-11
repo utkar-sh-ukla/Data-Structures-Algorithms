@@ -4,10 +4,13 @@
 
 ####    Time Complexity
 
--   Worst-case performance	{\displaystyle O(n\log n)}O(n\log n)
--   Best-case performance	{\displaystyle \Omega (n\log n)}\Omega (n\log n) typical, {\displaystyle \Omega (n)}\Omega (n) natural variant
--   Average performance	    {\displaystyle \Theta (n\log n)}\Theta (n\log n)
+-   Worst-case performance      O(n*log n)
+-   Best-case performance	    Ω(n*log n) typical, Ω(n) natural variant
+-   Average performance	        Θ(n*log n)
 
+####    Space Complexity
+
+-   Worst-case space complexity     O(n) total with O(n) auxiliary,O(1) auxiliary with linked lists
 
 ### Algorithm
 
@@ -23,7 +26,8 @@ Conceptually, a merge sort works as follows:
 /**
  *
  * The merge() function is used for merging two halves.
- * The merge(arr, l, m, r) is key process that assumes that arr[l..m] and arr[m+1..r] are sorted and merges the two sorted sub-arrays into one.
+ * The merge(arr, l, m, r) is key process 
+ * that assumes that arr[l..m] and arr[m+1..r] are sorted and merges the two sorted sub-arrays into one.
  *
  * @param arr - array with two halves arr[l...m] and arr[m+1...l]
  * @param l - left index or start index of first half array
