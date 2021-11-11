@@ -38,18 +38,15 @@ Conceptually, a merge sort works as follows:
  * @param l - end index or right index of second half array
  */
 void merge(int *arr, int l, int m, int r) {
-    int i, j, k;
     int n1 = m - l + 1;
     int n2 = r - m;
-
+    
     int *L = new int[n1], *R = new int[n2];
 
-    for (i = 0; i < n1; i++) L[i] = arr[l + i];
-    for (j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
+    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
+    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
 
-    i = 0;
-    j = 0;
-    k = l;
+    int i = 0, j = 0, k = l;
     while (i < n1 || j < n2) {
         if (j >= n2 || (i < n1 && L[i] <= R[j])) {
             arr[k++] = L[i++];
