@@ -4,13 +4,13 @@
 
 ####    Time Complexity
 
--   Worst-case performance&nbsp;&nbsp; -      **O(n*log n)**
--   Best-case performance&nbsp;&nbsp; - 	  **Ω(n*log n) typical, Ω(n) natural variant**
--   Average performance&nbsp;&nbsp; - 	      **Θ(n*log n)**
+-   Worst-case performance&nbsp;&nbsp; - &nbsp;&nbsp;     **O(n*log n)**
+-   Best-case performance&nbsp;&nbsp; - &nbsp;&nbsp;	  **Ω(n*log n) typical, Ω(n) natural variant**
+-   Average performance&nbsp;&nbsp; - &nbsp;&nbsp;	      **Θ(n*log n)**
 
 ####    Space Complexity
 
--   Worst-case space complexity&nbsp;&nbsp; -    **O(n) total with O(n) auxiliary,O(1) auxiliary with linked lists**
+-   Worst-case space complexity&nbsp;&nbsp; - &nbsp;&nbsp;    **O(n) total with O(n) auxiliary,O(1) auxiliary with linked lists**
 
 ### Algorithm
 
