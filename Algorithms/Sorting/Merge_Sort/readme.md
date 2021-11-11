@@ -52,13 +52,10 @@ void merge(int *arr, int l, int m, int r) {
     k = l;
     while (i < n1 || j < n2) {
         if (j >= n2 || (i < n1 && L[i] <= R[j])) {
-            arr[k] = L[i];
-            i++;
+            arr[k++] = L[i++];
         } else {
-            arr[k] = R[j];
-            j++;
+            arr[k++] = R[j++];
         }
-        k++;
     }
 
     delete[] L;
