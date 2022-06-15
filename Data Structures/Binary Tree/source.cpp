@@ -119,6 +119,33 @@ void btree::inorder_print(node *leaf){
 	}
 }
 
+// Moris inorder traversal
+
+// void btree::inorder_print(node *leaf) {
+//     node *cur = leaf;
+//     while(cur != NULL) {
+//         if(cur->left == NULL) {
+//             cout << cur->value <<  ",";
+//             cur = cur->right;
+//         }
+//         else {
+//             node *prev = cur->left;
+//             while(prev->right && prev->right != cur) {
+//                 prev = prev->right;
+//             }
+//             if(prev->right == NULL) {
+//                 prev->right = cur;
+//                 cur = cur->left;
+//             }
+//             else {
+//                 prev->right = NULL;
+//                 cout << cur->value << ",";
+//                 cur = cur->right;
+//             }
+//         }
+//     }
+// }
+
 void btree::postorder_print(){
 	postorder_print(root);
 	cout << "\n";
@@ -126,8 +153,8 @@ void btree::postorder_print(){
 
 void btree::postorder_print(node *leaf){
 	if(leaf != NULL){
-		inorder_print(leaf->left);
-		inorder_print(leaf->right);
+		postorder_print(leaf->left);
+		postorder_print(leaf->right);
 		cout << leaf->value << ",";
 	}
 }
@@ -140,10 +167,37 @@ void btree::preorder_print(){
 void btree::preorder_print(node *leaf){
 	if(leaf != NULL){
 		cout << leaf->value << ",";
-		inorder_print(leaf->left);
-		inorder_print(leaf->right);
+		preorder_print(leaf->left);
+		preorder_print(leaf->right);
 	}
 }
+
+// Moris preorder traversal
+
+// void btree::preorder_print(node *leaf) {
+//     node *cur = leaf;
+//     while(cur != NULL) {
+//         if(cur->left == NULL) {
+//             cout << cur->value <<  ",";
+//             cur = cur->right;
+//         }
+//         else {
+//             node *prev = cur->left;
+//             while(prev->right && prev->right != cur) {
+//                 prev = prev->right;
+//             }
+//             if(prev->right == NULL) {
+//                 prev->right = cur;
+//                 cout << cur->value << ",";
+//                 cur = cur->left;
+//             }
+//             else {
+//                 prev->right = NULL;
+//                 cur = cur->right;
+//             }
+//         }
+//     }
+// }
 
 int main(){
 
@@ -165,3 +219,9 @@ int main(){
 	delete tree;
 
 }
+
+// Outputs
+
+// 10,6,5,8,14,11,18,
+// 5,6,8,10,11,14,18,
+// 5,8,6,11,18,14,10,
