@@ -1,4 +1,6 @@
 #include <iostream>
+#include <map>
+#include <queue>
 
 using namespace std;
 
@@ -19,6 +21,8 @@ public:
 	void inorder_print();
 	void postorder_print();
 	void preorder_print();
+	void topView();
+	void bottomView();
 
 private:
 	void destroy_tree(node *leaf);
@@ -27,7 +31,8 @@ private:
 	void inorder_print(node *leaf);
 	void postorder_print(node *leaf);
 	void preorder_print(node *leaf);
-
+	void topView(node *leaf);
+	void bottomView(node *leaf);
 	node *root;
 };
 
@@ -199,6 +204,71 @@ void btree::preorder_print(node *leaf){
 //     }
 // }
 
+void btree::bottomView(){
+	bottomView(root);
+	cout << "\n";
+}
+
+void btree::bottomView(node *leaf) {
+	vector<int> ans;
+	if(leaf != NULL) {
+		map<int,int> mpp;
+		queue<pair<node*, int>> q;
+		q.push({leaf, 0});
+		while(!q.empty()) {
+			auto it = q.front();
+			q.pop();
+			node* _node = it.first;
+			int line = it.second;
+			mpp[line] = _node->value;
+
+			if(_node->left != NULL) {
+				q.push({_node->left, line-1});
+			}
+			if(_node->right != NULL) {
+				q.push({_node->right, line + 1});
+			}
+		}
+
+		for(auto it : mpp) {
+			cout << it.second << ",";
+		}
+	}
+
+}
+
+void btree::topView(){
+	topView(root);
+	cout << "\n";
+}
+
+void btree::topView(node *leaf) {
+	vector<int> ans;
+	if(leaf != NULL) {
+		map<int,int> mpp;
+		queue<pair<node*, int>> q;
+		q.push({leaf, 0});
+		while(!q.empty()) {
+			auto it = q.front();
+			q.pop();
+			node* _node = it.first;
+			int line = it.second;
+			if(mpp.find(line) == mpp.end()) mpp[line] = _node->value;
+
+			if(_node->left != NULL) {
+				q.push({_node->left, line-1});
+			}
+			if(_node->right != NULL) {
+				q.push({_node->right, line + 1});
+			}
+		}
+
+		for(auto it : mpp) {
+			cout << it.second << ",";
+		}
+	}
+}
+
 int main(){
 
 	//btree tree;
@@ -215,13 +285,16 @@ int main(){
 	tree->preorder_print();
 	tree->inorder_print();
 	tree->postorder_print();
-
+	tree->topView();
+	tree->bottomView();
 	delete tree;
 
 }
 
-// Outputs
+// Outputs:
 
 // 10,6,5,8,14,11,18,
 // 5,6,8,10,11,14,18,
 // 5,8,6,11,18,14,10,
+// 5,6,10,14,18,
+// 5,6,11,14,18
