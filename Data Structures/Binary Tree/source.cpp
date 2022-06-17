@@ -1,6 +1,8 @@
 #include <iostream>
 #include <map>
 #include <queue>
+#include <stack>
+#include <vector>
 
 using namespace std;
 
@@ -23,7 +25,7 @@ public:
 	void preorder_print();
 	void topView();
 	void bottomView();
-
+	void singleTraversalForAll();
 private:
 	void destroy_tree(node *leaf);
 	void insert(int key, node *leaf);
@@ -33,6 +35,7 @@ private:
 	void preorder_print(node *leaf);
 	void topView(node *leaf);
 	void bottomView(node *leaf);
+	void singleTraversalForAll(node *leaf, std::vector<int> &pre, std::vector<int> &in, std::vector<int> &post);
 	node *root;
 };
 
@@ -269,6 +272,68 @@ void btree::topView(node *leaf) {
 	}
 }
 
+//	PreOrder | Inorder | Postorder in one Traversals
+
+void btree::singleTraversalForAll() {
+	vector<int> pre, in, post;
+
+	singleTraversalForAll(root, pre, in, post);
+
+	for(auto it : pre) {
+		cout << it << ",";
+	}
+	cout << "\n";
+
+	for(auto it : in) {
+		cout << it << ",";
+	}
+	cout << "\n";
+
+	for(auto it : post) {
+		cout << it << ",";
+	}
+}
+
+void btree::singleTraversalForAll(node *leaf, vector<int> &pre, vector<int> &in, vector<int> &post) {
+	stack<pair<node*, int>> st;
+	st.push({leaf, 1});
+	if(leaf != NULL) {
+		while(!st.empty()) {
+			auto it = st.top();
+			st.pop();
+
+			// for PREORDER | 1 ~> 2
+			if(it.second == 1) {
+				pre.push_back(it.first->value);
+				it.second++;
+				st.push(it);
+
+				// push the left side of tree
+				if(it.first->left != NULL) {
+					st.push({it.first->left, 1});
+				}
+			}
+
+			// for INORDER | 2 ~> 3
+			else if(it.second == 2) {
+				in.push_back(it.first->value);
+				it.second++;
+				st.push(it);
+
+				// push the right side of tree
+				if(it.first->right != NULL) {
+					st.push({it.first->right, 1});
+				}
+			}
+
+			// for POSTORDER
+			else {
+				post.push_back(it.first->value);
+			}
+		}
+	}
+}
+
 int main(){
 
 	//btree tree;
@@ -287,6 +352,7 @@ int main(){
 	tree->postorder_print();
 	tree->topView();
 	tree->bottomView();
+	tree->singleTraversalForAll();
 	delete tree;
 
 }
@@ -297,4 +363,7 @@ int main(){
 // 5,6,8,10,11,14,18,
 // 5,8,6,11,18,14,10,
 // 5,6,10,14,18,
-// 5,6,11,14,18
+// 5,6,11,14,18,
+// 10,6,5,8,14,11,18,
+// 5,6,8,10,11,14,18,
+// 5,8,6,11,18,14,10,
