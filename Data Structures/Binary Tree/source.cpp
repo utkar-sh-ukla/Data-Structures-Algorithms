@@ -26,6 +26,7 @@ public:
 	void topView();
 	void bottomView();
 	void singleTraversalForAll();
+	void levelOrder();
 private:
 	void destroy_tree(node *leaf);
 	void insert(int key, node *leaf);
@@ -36,6 +37,7 @@ private:
 	void topView(node *leaf);
 	void bottomView(node *leaf);
 	void singleTraversalForAll(node *leaf, std::vector<int> &pre, std::vector<int> &in, std::vector<int> &post);
+	void levelOrder(node *leaf, vector<vector<int>> &ans);
 	node *root;
 };
 
@@ -292,6 +294,7 @@ void btree::singleTraversalForAll() {
 	for(auto it : post) {
 		cout << it << ",";
 	}
+	cout << '\n';
 }
 
 void btree::singleTraversalForAll(node *leaf, vector<int> &pre, vector<int> &in, vector<int> &post) {
@@ -334,6 +337,41 @@ void btree::singleTraversalForAll(node *leaf, vector<int> &pre, vector<int> &in,
 	}
 }
 
+// Level Order Traversal
+void btree::levelOrder() {
+    vector<vector<int>> ans;
+	if(root != NULL) {
+		levelOrder(root, ans);
+		for(auto row : ans) {
+			for(auto col : row) {
+				cout << col << ",";
+			}
+			cout << '\n';
+		}
+	}
+}
+
+void btree::levelOrder(node *leaf, vector<vector<int>> &ans) {
+	queue<node*>q;
+	q.push(leaf);
+	while(!q.empty()) {
+		int size = q.size();
+		vector<int>level;
+		for(int i=0; i<size; i++) {
+			node *parent = q.front();
+			q.pop();
+			if(parent->left != NULL) {
+				q.push(parent->left);
+			}
+			if(parent->right != NULL) {
+				q.push(parent->right);
+			}
+			level.push_back(parent->value);
+		}
+		ans.push_back(level);
+	}
+}
+
 int main(){
 
 	//btree tree;
@@ -353,6 +391,7 @@ int main(){
 	tree->topView();
 	tree->bottomView();
 	tree->singleTraversalForAll();
+	tree->levelOrder();
 	delete tree;
 
 }
@@ -367,3 +406,6 @@ int main(){
 // 10,6,5,8,14,11,18,
 // 5,6,8,10,11,14,18,
 // 5,8,6,11,18,14,10,
+// 10,
+// 6,14,
+// 5,8,11,18,
