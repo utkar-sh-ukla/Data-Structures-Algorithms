@@ -1,7 +1,7 @@
 #include <iostream>
 
 template <class T>
-class BinaryTree
+class BinarySearchTree
 {
 
 	struct node{
@@ -11,8 +11,8 @@ class BinaryTree
 	};
 
 public:
-	BinaryTree();
-	~BinaryTree();
+	BinarySearchTree();
+	~BinarySearchTree();
 	void add(T val);
 	void printPreOrder();
 	void printInOrder();
@@ -32,28 +32,28 @@ private:
 };
 
 template <class T>
-BinaryTree<T>::BinaryTree(){
+BinarySearchTree<T>::BinarySearchTree(){
 	this->root = NULL;
 	this->treeSize = 0;
 }
 
 template <class T>
-BinaryTree<T>::~BinaryTree(){
+BinarySearchTree<T>::~BinarySearchTree(){
 	deleteTree(this->root);
 }
 
 template <class T>
-int BinaryTree<T>::size(){
+int BinarySearchTree<T>::size(){
 	return this->treeSize;
 }
 
 template <class T>
-void BinaryTree<T>::add(T val){
+void BinarySearchTree<T>::add(T val){
 	add(&(this->root), val);
 }
 
 template <class T>
-void BinaryTree<T>::add(struct node** node, T val){
+void BinarySearchTree<T>::add(struct node** node, T val){
 
 	if(*node == NULL)	{
 		struct node* tmp = new struct node;
@@ -73,13 +73,13 @@ void BinaryTree<T>::add(struct node** node, T val){
 }
 
 template <class T>
-void BinaryTree<T>::printInOrder(){
+void BinarySearchTree<T>::printInOrder(){
 	printInOrder(this->root);
 	std::cout << std::endl;
 }
 
 template <class T>
-void BinaryTree<T>::printInOrder(struct node* node){
+void BinarySearchTree<T>::printInOrder(struct node* node){
 	if(node != NULL){
 		printInOrder(node->left);
 		std::cout << node->value << ", ";
@@ -88,13 +88,13 @@ void BinaryTree<T>::printInOrder(struct node* node){
 }
 
 template <class T>
-void BinaryTree<T>::printPreOrder(){
+void BinarySearchTree<T>::printPreOrder(){
 	printPreOrder(this->root);
 	std::cout << std::endl;
 }
 
 template <class T>
-void BinaryTree<T>::printPreOrder(struct node* node){
+void BinarySearchTree<T>::printPreOrder(struct node* node){
 	if(node != NULL)	{
 		std::cout << node->value << ", ";
 		printInOrder(node->left);
@@ -103,13 +103,13 @@ void BinaryTree<T>::printPreOrder(struct node* node){
 }
 
 template <class T>
-void BinaryTree<T>::printPostOrder(){
+void BinarySearchTree<T>::printPostOrder(){
 	printPostOrder(this->root);
 	std::cout << std::endl;
 }
 
 template <class T>
-void BinaryTree<T>::printPostOrder(struct node* node){
+void BinarySearchTree<T>::printPostOrder(struct node* node){
 	if(node != NULL){
 		printInOrder(node->left);
 		printInOrder(node->right);
@@ -119,7 +119,7 @@ void BinaryTree<T>::printPostOrder(struct node* node){
 
 
 template <class T>
-void BinaryTree<T>::deleteTree(struct node* node){
+void BinarySearchTree<T>::deleteTree(struct node* node){
 	if(node != NULL){
 		deleteTree(node->left);
 		deleteTree(node->right);
@@ -128,12 +128,12 @@ void BinaryTree<T>::deleteTree(struct node* node){
 }
 
 template <class T>
-bool BinaryTree<T>::lookup(T val){
+bool BinarySearchTree<T>::lookup(T val){
 	return lookup(this->root, val);
 }
 
 template <class T>
-bool BinaryTree<T>::lookup(struct node* node, T val){
+bool BinarySearchTree<T>::lookup(struct node* node, T val){
 	if(node == NULL){
 		return false;
 	}else{
@@ -152,7 +152,7 @@ bool BinaryTree<T>::lookup(struct node* node, T val){
 
 int main(){
 
-	BinaryTree<int> tree;
+	BinarySearchTree<int> tree;
 
 	tree.add(5);
 	tree.add(4);
@@ -167,7 +167,7 @@ int main(){
 
 	std::cout << "Tree size: " << tree.size() << std::endl;
 
-	BinaryTree<char> tee;
+	BinarySearchTree<char> tee;
 
 	tee.add('z');
 	tee.add('0');
