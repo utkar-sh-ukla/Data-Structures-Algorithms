@@ -14,5 +14,5 @@ int btree::maxPath(node* leaf) {
 }
 
 void btree::maxPath() {
-    cout << maxPath(root) << endl;
+    cout << len << endl;
 }
