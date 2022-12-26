@@ -1,211 +1,55 @@
-#include <iostream>
+#include "header/LinkedList.h"
+#include "library/LinkedList.cpp"
 
-using namespace std;
+int main()
+{
+	LinkedList<int>* l1 = new LinkedList<int>();
 
-struct node {
-    int data;
-    node* next;
-    node(int value) : data(value), next(NULL) {}
-} *head = NULL;
+	l1->addToHead(20);
+	l1->print();
+	l1->addToTail(40);
+	l1->print();
+	l1->add(1, 60);
+	l1->print();
 
-bool Is_List_Empty() {
-    return (head == NULL);
+	l1->add(2, 75);
+	l1->print();
+
+	l1->add(3, 70);
+	l1->print();
+
+	l1->add(4, 80);
+	l1->print();
+
+	l1->deleteTail();
+	l1->print();
+
+	l1->deleteAt(3);
+	l1->print();
+
+
+	LinkedList<int>* l2 = new LinkedList<int>();
+
+	l2->addToHead(10);
+	l2->print();
+	l2->addToTail(23);
+	l2->print();
+	l2->add(1, 43);
+	l2->print();
+
+	l2->add(2, 55);
+	l2->print();
+
+	l2->add(3, 27);
+	l2->print();
+
+	l2->add(4, 19);
+	l2->print();
+
+	l2->deleteTail();
+	l2->print();
+
+	l2->deleteAt(2);
+	l2->print();
+
 }
-
-void Insert_At_Beginning(int value) {
-    node* temp = new node(value);
-    temp->next = head;
-    head = temp;
-}
-
-void Insert_At_End(int value) {
-    node* temp = new node(value);
-    if (Is_List_Empty()) {
-        head = temp;
-        return;
-    }
-    node* current = head;
-    while (current->next != NULL) {
-        current = current->next;
-    }
-    current->next = temp;
-}
-
-void Insert_After_Value(int desired, int value) {
-
-    node* current = head;
-    while (current != NULL && current->data != desired)
-        current = current->next;
-
-    if (current == NULL) {
-        cout << "Element " << desired << " is not in list" << endl;
-    }
-    else {
-        node* temp = new node(value);
-        temp->next = current->next;
-        current->next = temp;
-    }
-}
-
-void Delete_At_Beginning() {
-    if (Is_List_Empty())
-        cout << "List is empty" << endl;
-    else {
-        node* temp = head;
-        head = head->next;
-        temp->next = NULL;
-        delete temp;
-    }
-}
-
-void Delete_At_End() {
-    if (Is_List_Empty()) {
-        cout << "List is empty" << endl;
-        return;
-    }
-
-    if (head->next == NULL) {
-        delete head;
-        head = NULL;
-        return;
-    }
-
-    node* temp = head;
-    while (temp->next->next != NULL) {
-        temp = temp->next;
-    }
-    delete temp->next;
-    temp->next = NULL;
-}
-
-void Delete_With_Value(int desired) {
-    if (Is_List_Empty()) {
-        cout << "List is empty" << endl;
-        return;
-    }
-
-    node* temp = head, * prev = NULL;
-    if (head->data == desired) {
-        head = head->next;
-        temp->next = NULL;
-        delete temp;
-        return;
-    }
-
-    while (temp != NULL && temp->data != desired) {
-        prev = temp;
-        temp = temp->next;
-    }
-    if (temp == NULL) {
-        cout << "Element " << desired << " not in list" << endl;
-    }
-    else {
-        prev->next = temp->next;
-        temp->next = NULL;
-        delete temp;
-    }
-}
-
-void Search(int desired) {
-    node* temp = head;
-    while (temp != NULL && temp->data != desired) {
-        temp = temp->next;
-    }
-    if (temp == NULL) {
-        cout << "Element " << desired << " not found" << endl;
-    }
-    else {
-        cout << "Element " << desired << " is present in list" << endl;
-    }
-}
-
-void Print_Linked_List() {
-    if (Is_List_Empty()) {
-        cout << "List is Empty" << endl;
-        return;
-    }
-
-    node* current = head;
-    while (current != NULL) {
-        cout << current->data;
-        current = current->next;
-        if (current != NULL)
-            cout << " -> ";
-    }
-    cout << endl;
-}
-
-void Length_Iterative() {
-    int length = 0;
-    node* temp = head;
-    while (temp) {
-        length += 1;
-        temp = temp->next;
-    }
-    cout << "Length is " << length << " (Iterative)" << endl;
-}
-
-int Recursive_Count(node* current) {
-    if (current == NULL)
-        return 0;
-    return (1 + Recursive_Count(current->next));
-}
-
-void Length_Recursive() {
-    int length = Recursive_Count(head);
-    cout << "Length is " << length << " (Recursive)" << endl;
-}
-
-int main() {
-    for (int i = 0; i < 5; i++)
-        Insert_At_Beginning(i);
-
-    Print_Linked_List();
-
-    for (int i = 5; i < 10; i++)
-        Insert_At_End(i);
-
-    Print_Linked_List();
-
-    Insert_After_Value(5, 9);
-    Insert_After_Value(10, 9);
-
-    Print_Linked_List();
-
-    for (int i = 0; i < 3; i++)
-        Delete_At_End();
-
-    Print_Linked_List();
-
-    for (int i = 0; i < 3; i++)
-        Delete_At_Beginning();
-
-    Print_Linked_List();
-
-    Delete_With_Value(1);
-    Delete_With_Value(5);
-
-    Print_Linked_List();
-
-    Search(6);
-    Search(8);
-
-    Length_Iterative();
-    Length_Recursive();
-
-    return 0;
-}
-
-/*  Output
-    4 -> 3 -> 2 -> 1 -> 0
-    4 -> 3 -> 2 -> 1 -> 0 -> 5 -> 6 -> 7 -> 8 -> 9
-    Element 10 is not in list
-    4 -> 3 -> 2 -> 1 -> 0 -> 5 -> 9 -> 6 -> 7 -> 8 -> 9
-    4 -> 3 -> 2 -> 1 -> 0 -> 5 -> 9 -> 6
-    1 -> 0 -> 5 -> 9 -> 6
-    0 -> 9 -> 6
-    Element 6 is present in list
-    Element 8 not found
-    Length is 3 (Iterative)
-    Length is 3 (Recursive)
-*/
