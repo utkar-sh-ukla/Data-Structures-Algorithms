@@ -1,5 +1,6 @@
 int binarySearch(vector<int>&v, int low, int high, int target) {
     if(low <= high) {
+        int mid = low + (high - low)/2;
         if(v[mid] < target)
             return binarySearch(v, mid+1, high, target);
 
