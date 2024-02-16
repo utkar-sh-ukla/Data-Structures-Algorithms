@@ -1,7 +1,3 @@
-Certainly! Let's present the information in a more organized way using tables.
-
----
-
 # C++ Data Structures and Algorithms Cheat Sheet
 
 ## 1.0 Data Structures
@@ -96,3 +92,78 @@ Certainly! Let's present the information in a more organized way using tables.
 | **Properties**          | **Methods**                  | **Complexities**        |
 |-------------------------|------------------------------|--------------------------|
 | Balanced height trees   | Same as Binary Tree          | Same as Binary Tree      |
+
+### 2.3 Binary Search
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Sorted order            | Binary Search Algorithm      | Access/Search: O(log n)  |
+|                         |                              | Insertion/Deletion: O(log n) |
+
+### 2.4 Depth-First Search (DFS)
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Graph traversal         | Depth-First Search Algorithm  | Access/Search: O(V + E)  |
+|                         |                              | V - number of vertices, E - number of edges |
+
+### 2.5 Breadth-First Search (BFS)
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Graph traversal         | Breadth-First Search Algorithm| Access/Search: O(V + E)  |
+|                         |                              | V - number of vertices, E - number of edges |
+
+## 3.0 NP Complete Problems
+
+### 3.1 NP Complete
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Class of problems       | Not applicable               | Not applicable           |
+
+### 3.2 Traveling Salesman Problem
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Optimization problem    | NP-Hard problem              | Exponential complexity   |
+
+### 3.3 Knapsack Problem
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Optimization problem    | Dynamic Programming Solution | Polynomial complexity    |
+
+## 4.0 Algorithms
+
+### 4.1 Insert
+
+ion Sort
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Sorting algorithm       | Insertion Sort Algorithm      | Time: O(n^2), Space: O(1)|
+
+### 4.2 Selection Sort
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Sorting algorithm       | Selection Sort Algorithm      | Time: O(n^2), Space: O(1)|
+
+### 4.3 Bubble Sort
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Sorting algorithm       | Bubble Sort Algorithm        | Time: O(n^2), Space: O(1)|
+
+### 4.4 Merge Sort
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Sorting algorithm       | Merge Sort Algorithm         | Time: O(n log n), Space: O(n)|
+
+### 4.5 Quicksort
+
+| **Properties**          | **Methods**                  | **Complexities**        |
+|-------------------------|------------------------------|--------------------------|
+| Sorting algorithm       | Quicksort Algorithm          | Time: O(n log n), Space: O(log n)|
