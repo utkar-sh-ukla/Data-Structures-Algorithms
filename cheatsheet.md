@@ -136,9 +136,7 @@
 
 ## 4.0 Algorithms
 
-### 4.1 Insert
-
-ion Sort
+### 4.1 Insertion Sort
 
 | **Properties**          | **Methods**                  | **Complexities**        |
 |-------------------------|------------------------------|--------------------------|
