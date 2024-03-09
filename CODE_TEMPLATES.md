@@ -52,7 +52,7 @@ int function(vector<int>& arr1, vector<int>& arr2) {
 }
 ```
 
-## Sliding window
+##  Sliding window
 
 ```cpp
 int function(vector<int>& arr) {
@@ -73,7 +73,7 @@ int function(vector<int>& arr) {
 }
 ```
 
-## Prefix sum
+##  Prefix sum
 
 ```cpp
 vector<int> function(vector<int>& arr) {
@@ -87,6 +87,230 @@ vector<int> function(vector<int>& arr) {
     return prefix;
 }
 ```
+
+##  Subarray
+
+### Find number of subarrays that fit an exact criteria
+
+```cpp
+int function(vector<int>& arr, int k) {
+    unordered_map<int, int> counts;
+    counts[0] = 1;
+    int ans = 0, curr = 0;
+
+    for (int num: arr) {
+        // do logic to change curr
+        ans += counts[curr - k];
+        counts[curr]++;
+    }
+
+    return ans;
+}
+```
+
+### Stack
+
+##  Monotonic increasing stack
+
+```cpp
+int function(vector<int>& arr) {
+    stack<integer> stack;
+    int ans = 0;
+
+    for (int num: arr) {
+        // for monotonic decreasing, just flip the > to <
+        while (!stack.empty() && stack.top() > num) {
+            // do logic
+            stack.pop();
+        }
+
+        stack.push(num);
+    }
+}
+```
+
+##  Binary search
+
+
+```cpp
+int binarySearch(vector<int>& arr, int target) {
+        int left = 0;
+        int right = int(arr.size()) - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == target) {
+                // do something;
+                return mid;
+            }
+            if (arr[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        
+        // left is the insertion point
+        return left;
+    }
+```
+
+### Duplicate elements, left-most insertion point
+
+```cpp
+int binarySearch(vector<int>& arr, int target) {
+    int left = 0;
+    int right = arr.size();
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] >= target) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    
+    return left;
+}
+```
+
+### Duplicate elements, right-most insertion point
+
+```cpp
+int binarySearch(vector<int>& arr, int target) {
+    int left = 0;
+    int right = arr.size();
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] > target) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    
+    return left;
+}
+```
+
+### For greedy problems : If looking for a minimum
+
+```cpp
+int function(vector<int>& arr) {
+    int left = MINIMUM_POSSIBLE_ANSWER;
+    int right = MAXIMUM_POSSIBLE_ANSWER;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (check(mid)) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return left;
+}
+
+bool check(int x) {
+    // this function is implemented depending on the problem
+    return BOOLEAN;
+}
+```
+
+### For greedy problems : If looking for a maximum
+
+```cpp
+int function(vector<int>& arr) {
+    int left = MINIMUM_POSSIBLE_ANSWER;
+    int right = MAXIMUM_POSSIBLE_ANSWER;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (check(mid)) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return right;
+}
+
+bool check(int x) {
+    // this function is implemented depending on the problem
+    return BOOLEAN;
+}
+```
+
+##  Heap
+
+### Find top k elements with heap
+
+```cpp
+vector<int> function(vector<int>& arr, int k) {
+    priority_queue<int, CRITERIA> heap;
+    for (int num: arr) {
+        heap.push(num);
+        if (heap.size() > k) {
+            heap.pop();
+        }
+    }
+
+    vector<int> ans;
+    while (heap.size() > 0) {
+        ans.push_back(heap.top());
+        heap.pop();
+    }
+
+    return ans;
+}
+```
+
+
+##  Backtracking
+
+```cpp
+int backtrack(STATE curr, OTHER_ARGUMENTS...) {
+    if (BASE_CASE) {
+        // modify the answer
+        return 0;
+    }
+
+    int ans = 0;
+    for (ITERATE_OVER_INPUT) {
+        // modify the current state
+        ans += backtrack(curr, OTHER_ARGUMENTS...)
+        // undo the modification of the current state
+    }
+
+    return ans;
+}
+```
+
+##  Dynamic programming
+
+### Top-Down memoization
+
+```cpp
+unordered_map<STATE, int> memo;
+
+int function(vector<int>& arr) {
+    return dp(STATE_FOR_WHOLE_INPUT, arr);
+}
+
+int dp(STATE, vector<int>& arr) {
+    if (BASE_CASE) {
+        return 0;
+    }
+
+    if (memo.find(STATE) != memo.end()) {
+        return memo[STATE];
+    }
+
+    int ans = RECURRENCE_RELATION(STATE);
+    memo[STATE] = ans;
+    return ans;
+}
+```
+
 
 ##  Linked List
 
@@ -108,7 +332,7 @@ int function(ListNode* head) {
 }
 ```
 
-##  Reversing Linked List
+###  Reversing Linked List
 
 ```cpp
 ListNode* function(ListNode* head) {
@@ -125,46 +349,7 @@ ListNode* function(ListNode* head) {
 }
 ```
 
-## Subarray
-
-### Find number of subarrays that fit an exact criteria
-
-```cpp
-int function(vector<int>& arr, int k) {
-    unordered_map<int, int> counts;
-    counts[0] = 1;
-    int ans = 0, curr = 0;
-
-    for (int num: arr) {
-        // do logic to change curr
-        ans += counts[curr - k];
-        counts[curr]++;
-    }
-
-    return ans;
-}
-```
-
-##  Monotonic increasing stack
-
-```cpp
-int function(vector<int>& arr) {
-    stack<integer> stack;
-    int ans = 0;
-
-    for (int num: arr) {
-        // for monotonic decreasing, just flip the > to <
-        while (!stack.empty() && stack.top() > num) {
-            // do logic
-            stack.pop();
-        }
-
-        stack.push(num);
-    }
-}
-```
-
-## Binary tree 
+##  Binary tree 
 
 ### DFS (recursive)
 
@@ -342,186 +527,6 @@ while (!heap.empty()) {
 ```
 
 
-##  Heap
-
-### Find top k elements with heap
-
-```cpp
-vector<int> function(vector<int>& arr, int k) {
-    priority_queue<int, CRITERIA> heap;
-    for (int num: arr) {
-        heap.push(num);
-        if (heap.size() > k) {
-            heap.pop();
-        }
-    }
-
-    vector<int> ans;
-    while (heap.size() > 0) {
-        ans.push_back(heap.top());
-        heap.pop();
-    }
-
-    return ans;
-}
-```
-
-## Binary search
-
-
-```cpp
-int binarySearch(vector<int>& arr, int target) {
-        int left = 0;
-        int right = int(arr.size()) - 1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] == target) {
-                // do something;
-                return mid;
-            }
-            if (arr[mid] > target) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
-        }
-        
-        // left is the insertion point
-        return left;
-    }
-```
-
-### Duplicate elements, left-most insertion point
-
-```cpp
-int binarySearch(vector<int>& arr, int target) {
-    int left = 0;
-    int right = arr.size();
-    while (left < right) {
-        int mid = left + (right - left) / 2;
-        if (arr[mid] >= target) {
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
-    }
-    
-    return left;
-}
-```
-
-### Duplicate elements, right-most insertion point
-
-```cpp
-int binarySearch(vector<int>& arr, int target) {
-    int left = 0;
-    int right = arr.size();
-    while (left < right) {
-        int mid = left + (right - left) / 2;
-        if (arr[mid] > target) {
-            right = mid;
-        } else {
-            left = mid + 1;
-        }
-    }
-    
-    return left;
-}
-```
-
-### For greedy problems : If looking for a minimum
-
-```cpp
-int function(vector<int>& arr) {
-    int left = MINIMUM_POSSIBLE_ANSWER;
-    int right = MAXIMUM_POSSIBLE_ANSWER;
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        if (check(mid)) {
-            right = mid - 1;
-        } else {
-            left = mid + 1;
-        }
-    }
-
-    return left;
-}
-
-bool check(int x) {
-    // this function is implemented depending on the problem
-    return BOOLEAN;
-}
-```
-
-### For greedy problems : If looking for a maximum
-
-```cpp
-int function(vector<int>& arr) {
-    int left = MINIMUM_POSSIBLE_ANSWER;
-    int right = MAXIMUM_POSSIBLE_ANSWER;
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        if (check(mid)) {
-            left = mid + 1;
-        } else {
-            right = mid - 1;
-        }
-    }
-
-    return right;
-}
-
-bool check(int x) {
-    // this function is implemented depending on the problem
-    return BOOLEAN;
-}
-```
-
-##  Backtracking
-
-```cpp
-int backtrack(STATE curr, OTHER_ARGUMENTS...) {
-    if (BASE_CASE) {
-        // modify the answer
-        return 0;
-    }
-
-    int ans = 0;
-    for (ITERATE_OVER_INPUT) {
-        // modify the current state
-        ans += backtrack(curr, OTHER_ARGUMENTS...)
-        // undo the modification of the current state
-    }
-
-    return ans;
-}
-```
-
-##  Dynamic programming
-
-### Top-Down memoization
-
-```cpp
-unordered_map<STATE, int> memo;
-
-int function(vector<int>& arr) {
-    return dp(STATE_FOR_WHOLE_INPUT, arr);
-}
-
-int dp(STATE, vector<int>& arr) {
-    if (BASE_CASE) {
-        return 0;
-    }
-
-    if (memo.find(STATE) != memo.end()) {
-        return memo[STATE];
-    }
-
-    int ans = RECURRENCE_RELATION(STATE);
-    memo[STATE] = ans;
-    return ans;
-}
-```
 
 ##  Trie
 
